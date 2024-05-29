@@ -3,7 +3,6 @@ const axios = require("axios");
 
 const app = express();
 
-// Obtener todos los todos
 app.get("/usuarios", async (req, res) => {
   try {
     const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
@@ -14,7 +13,6 @@ app.get("/usuarios", async (req, res) => {
   }
 });
 
-// Obtener un todo por ID
 app.get("/usuarios/:id", async (req, res) => {
   try {
     const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.id}`);
@@ -28,7 +26,6 @@ app.get("/usuarios/:id", async (req, res) => {
   }
 });
 
-// Buscar todos por título
 app.get("/usuarios/title/:title", async (req, res) => {
   try {
     const response = await axios.get(
@@ -41,7 +38,6 @@ app.get("/usuarios/title/:title", async (req, res) => {
   }
 });
 
-// Obtener un número limitado de todos
 app.get("/usuarios/limite/:limit", async (req, res) => {
   try {
     const limit = parseInt(req.params.limit, 10);
