@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 4000;
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 
 let tasks = [];
@@ -35,6 +37,16 @@ app.put('/tasks/:id', (req, res) => {
         res.status(404).json({error: 'No se encontró la tarea solicitada'});
     } else {
         task.title = req.body.title;
+        task.complete = req.body.complete !== undefined ? req.body.complete : task.complete;
+        res.json(task);
+    }
+});
+
+app.patch('/tasks/:id', (req, res) => {
+    const task = tasks.find(task => task.id === parseInt(req.params.id));
+    if (!task) {
+        res.status(404).json({error: 'No se encontró la tarea solicitada'});
+    } else {
         task.complete = req.body.complete !== undefined ? req.body.complete : task.complete;
         res.json(task);
     }
